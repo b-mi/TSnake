@@ -1,0 +1,16 @@
+.square {
+    
+    /* background: #000; */
+    /* width: min(80vw, 80vh);
+    height: min(80vw, 80vh); */
+    text-align: center;
+}
+/* .square h1 {
+    color: #fff;
+} */
+
+canvas {
+    border: 1px solid gray;
+    width: 420px;
+    height: 420px;
+}

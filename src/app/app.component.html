@@ -1,0 +1,74 @@
+<mat-toolbar color="primary">
+  <span>{{title}}</span>
+  <span class="spacer"></span>
+  <span>Score:</span>&nbsp;
+  <h1 id="score">0</h1>
+
+</mat-toolbar>
+<mat-toolbar>
+  <mat-card-subtitle>
+    Use Left, Right, Up, Down keys, Space for pause
+  </mat-card-subtitle>
+  <span class="spacer"></span>
+  <mat-card-subtitle id="info">
+  </mat-card-subtitle>
+  <button *ngIf="!showRecord" mat-raised-button (click)="showScoreList()">Continue</button>
+</mat-toolbar>
+<canvas [hidden]="showRecord" width="420" height="420"></canvas>
+<ng-container *ngIf="showRecord">
+  <mat-card>
+    <mat-form-field *ngIf="lastScore">
+      <input matInput placeholder="Player name" [(ngModel)]="playerName">
+    </mat-form-field>
+    <span *ngIf="lastScore">
+      &nbsp; Score: &nbsp; {{lastScore}}&nbsp;
+    </span>
+    <button *ngIf="lastScore" mat-raised-button (click)="saveScore()" style="margin-right: 10px;">Save</button>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <p></p>
+<mat-divider>
+</mat-divider>
+<p></p>
+    <mat-card-content>
+      <mat-divider>
+      </mat-divider>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+          <div style="width: 20px;text-align: right;">
+            <mat-card-subtitle>Rank</mat-card-subtitle>
+          </div>
+          <div style="width: 200px;text-align: right;">
+            <mat-card-subtitle>Name</mat-card-subtitle>
+          </div>
+          <div style="width: 40px;text-align: right;">
+            <mat-card-subtitle>Score</mat-card-subtitle>
+
+          </div>
+          <div style="width: 140px;text-align: right;">
+            <mat-card-subtitle>Time</mat-card-subtitle>
+
+          </div>
+        </div>
+        <ng-container *ngFor="let item of scoreList; let i=index">
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+
+            <div style="width: 20px;text-align: right;">
+              {{i+1}}.
+            </div>
+            <div style="width: 200px;text-align: right;">
+              {{item.name}}
+            </div>
+            <div style="width: 40px;text-align: right;">
+              {{item.score}}
+            </div>
+            <div style="width: 140px;text-align: right;">
+              {{item.created | date:"dd.MM.yyyy HH:mm"}}
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</ng-container>
+<!-- {{playerName}} -->
