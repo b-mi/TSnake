@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   scoreList = [];
   showRecord = false;
 
+  btnTitle = 'Score';
+
   playerName = "";
   lastScore = 0;
 
@@ -38,16 +40,17 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // this.gameEnd(4);
     this.start();
   }
 
   start() {
     this.game = new Game();
+    this.btnTitle = 'Score';
+
     var timer = setInterval(() => {
       this.game.gameLoop();
       console.log('over', this.game.gameOver);
-      
+
       if (this.game.gameOver) {
         clearInterval(timer);
         this.gameEnd(this.game.scoreNum);
@@ -57,6 +60,9 @@ export class AppComponent implements OnInit {
 
   gameEnd(score) {
     this.lastScore = score;
+    if (score > 0) {
+      this.btnTitle = 'Save score';
+    }
   }
 
   async loadScoreList() {
@@ -83,6 +89,9 @@ export class AppComponent implements OnInit {
   }
 
   showScoreList() {
+    if (this.game) {
+      this.game.gameOver = true;
+    }
     this.loadScoreList();
     this.showRecord = true;
   }

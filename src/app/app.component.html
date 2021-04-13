@@ -3,8 +3,6 @@
   <span class="spacer"></span>
   <span>Score:</span>&nbsp;
   <h1 id="score">0</h1>
-  <button mat-button (click)="start()">start</button>
-
 </mat-toolbar>
 <mat-toolbar *ngIf="!showRecord" style="margin-bottom: 20px;">
   <mat-card-subtitle>
@@ -13,7 +11,7 @@
   <span class="spacer"></span>
   <mat-card-subtitle id="info">
   </mat-card-subtitle>
-  <button *ngIf="!showRecord" mat-raised-button (click)="showScoreList()">Score</button>
+  <button *ngIf="!showRecord" mat-raised-button (click)="showScoreList()">{{btnTitle}}</button>
 </mat-toolbar>
 <canvas [hidden]="showRecord" width="420" height="420"></canvas>
 <ng-container *ngIf="showRecord">
