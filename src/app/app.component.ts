@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   lastScore = 0;
 
   game: Game;
+  appleIsLoaded = false;
 
 
   @HostListener('document:keydown', ['$event'])
@@ -39,8 +40,8 @@ export class AppComponent implements OnInit {
 
   }
 
-  async ngOnInit() {
-    this.start();
+  ngOnInit() {
+      
   }
 
   start() {
@@ -94,6 +95,12 @@ export class AppComponent implements OnInit {
     }
     this.loadScoreList();
     this.showRecord = true;
+  }
+
+  appleLoaded(){
+    console.log('apll');
+    this.appleIsLoaded = true;
+    this.start();
   }
 
 }

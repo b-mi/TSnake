@@ -27,6 +27,10 @@ export class Game {
     readonly colorSnakeCross = 'orangered';
     readonly colorBkg = 'white';
 
+
+    apple: any;
+    appleLoaded = false;
+
     snakeData = [];
     gameOverMsg: any;
 
@@ -35,13 +39,13 @@ export class Game {
     }
 
     init() {
-        console.log('doc', document);
         this.canvas = document.querySelector("canvas");
         if (!this.canvas) {
             return;
         }
         this.score = document.getElementById("score");
-        this.ctx = this.canvas?.getContext("2d");
+        this.apple = document.getElementById("apple");
+        this.ctx = this.canvas.getContext("2d");
         this.snakeY = this.canvas?.height / 2;
         this.snakeSpeed = this.tileSize;
         this.snakeDiffX = this.snakeSpeed;
@@ -61,9 +65,11 @@ export class Game {
 
         for (var y = 0; y < this.canvas.width / this.tileSize; y++) {
             for (var x = 0; x < this.canvas.width / this.tileSize; x++) {
-                this.drawRect('white', x * this.tileSize, y * this.tileSize, this.tileSize - 1, this.tileSize - 1);
+                this.drawRect(this.colorBkg, x * this.tileSize, y * this.tileSize, this.tileSize - 1, this.tileSize - 1);
             }
         }
+
+
 
         //
         this.snakeData.push({ x: this.snakeX, y: this.snakeY });
@@ -72,7 +78,10 @@ export class Game {
 
         this.drawObject(this.colorSnakeHead, this.snakeX, this.snakeY);
         this.resetFood();
-    //    this.gameLoop();
+
+
+
+        //    this.gameLoop();
     }
 
     gameLoop() {
@@ -145,7 +154,7 @@ export class Game {
                 } else {
                     // mazat koniec
                     var sd = this.snakeData[this.snakeData.length - 1];
-                    this.drawObject('white', sd.x, sd.y);
+                    this.drawObject(this.colorBkg, sd.x, sd.y);
                     // clear body
                     this.snakeData.splice(-1, 1);
                 }
@@ -165,7 +174,7 @@ export class Game {
                 }
             }
 
-      //      setTimeout(this.gameLoop, this.gameSpeed);
+            //      setTimeout(this.gameLoop, this.gameSpeed);
         }
     }
 
@@ -345,7 +354,13 @@ export class Game {
                 break;
             }
         }
-        this.drawObject(this.colorFood, this.foodX, this.foodY);
+
+        this.drawApple();
     }
 
+
+    private drawApple() {
+        this.ctx.drawImage(this.apple, this.foodX + 6, this.foodY + 2);
+        // this.drawObject(this.colorFood, this.foodX, this.foodY);
+    }
 };
