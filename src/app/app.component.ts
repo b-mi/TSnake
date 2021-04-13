@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { AppService } from './app.service';
+import { Game } from './game';
+
 declare function myTest(fnc: any): any;
 
 @Component({
@@ -15,7 +17,17 @@ export class AppComponent implements OnInit {
   playerName = "";
   lastScore = 0;
 
-  @Output() gameOverEvent = new EventEmitter();
+  game: Game;
+
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (this.game && !this.game.gameOver) {
+      this.game.keyPush(event);
+    }
+
+    // this.key = event.key;
+  }
 
   /**
    *
@@ -31,12 +43,16 @@ export class AppComponent implements OnInit {
   }
 
   start() {
-
-    const goe = this.gameOverEvent.subscribe(r => {
-      // goe.unsubscribe();
-      this.gameEnd(r.score);
-    });
-    myTest(this.gameOverEvent);
+    this.game = new Game();
+    var timer = setInterval(() => {
+      this.game.gameLoop();
+      console.log('over', this.game.gameOver);
+      
+      if (this.game.gameOver) {
+        clearInterval(timer);
+        this.gameEnd(this.game.scoreNum);
+      }
+    }, this.game.gameSpeed);
   }
 
   gameEnd(score) {
