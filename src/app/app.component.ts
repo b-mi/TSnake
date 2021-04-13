@@ -8,7 +8,7 @@ declare function myTest(fnc: any): any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Toroidal snake aka T-HAD';
+  title = 'SNAKE GAME (toroidal)';
   scoreList = [];
   showRecord = false;
 
