@@ -11,8 +11,8 @@ declare function myTest(fnc: any): any;
 })
 export class AppComponent implements OnInit {
   title = 'SNAKE GAME (toroidal)';
-  scoreList = [];
-  showRecord = false;
+  // scoreList = [];
+  // showRecord = false;
 
   btnTitle = 'Score';
 
@@ -66,36 +66,35 @@ export class AppComponent implements OnInit {
     }
   }
 
-  async loadScoreList() {
-    var rtn = await this.service.getSnakeScores();
-    this.scoreList = rtn.dt as any[];
-  }
+  // async loadScoreList() {
+  //   var rtn = await this.service.getSnakeScores();
+  //   this.scoreList = rtn.dt as any[];
+  // }
 
-  async saveScore() {
-    if (!this.playerName) {
-      this.playerName = 'Little noob';
-    }
-    var newScore = { name: this.playerName, score: this.lastScore, created: new Date() };
+  // async saveScore() {
+  //   if (!this.playerName) {
+  //     this.playerName = 'Little noob';
+  //   }
+  //   var newScore = { name: this.playerName, score: this.lastScore, created: new Date() };
 
-    var rtn = await this.service.putSnakeScore(newScore);
-    this.scoreList = rtn.dt as any[];
+  //   var rtn = await this.service.putSnakeScore(newScore);
+  //   this.scoreList = rtn.dt as any[];
 
-    this.lastScore = 0;
-  }
+  //   this.lastScore = 0;
+  // }
 
-  cancel() {
-    this.lastScore = 0;
-    this.showRecord = false;
-    location.reload();
-  }
+   newGame() {
+     this.lastScore = 0;
+     location.reload();
+   }
 
-  showScoreList() {
-    if (this.game) {
-      this.game.gameOver = true;
-    }
-    this.loadScoreList();
-    this.showRecord = true;
-  }
+  // showScoreList() {
+  //   if (this.game) {
+  //     this.game.gameOver = true;
+  //   }
+  //   this.loadScoreList();
+  //   this.showRecord = true;
+  // }
 
   appleLoaded(){
     console.log('apll');

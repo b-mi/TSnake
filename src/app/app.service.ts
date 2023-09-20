@@ -12,12 +12,12 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
 
-  async getSnakeScores() {
-    return await this.http.get<any>(`${this.baseUrl}/snake/scores`).toPromise();
-  }
+  // async getSnakeScores() {
+  //   return await this.http.get<any>(`${this.baseUrl}/snake/scores`).toPromise();
+  // }
 
-  async putSnakeScore(newScore: { name: string; score: number; created: Date; }) {
-    return await this.http.put<any>(`${this.baseUrl}/snake/putScore`, newScore).toPromise();
-  }
+  // async putSnakeScore(newScore: { name: string; score: number; created: Date; }) {
+  //   return await this.http.put<any>(`${this.baseUrl}/snake/putScore`, newScore).toPromise();
+  // }
 
 }
